@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">pro1</string>
+    <string-array name="languages">
+        <item>English</item>
+
+        <item>French</item>
+        <item>German</item>
+        <item>Hindi</item>
+        <item>Italian</item>
+        <item>Japanese</item>
+        <item>Korean</item>
+    </string-array>
+</resources>
