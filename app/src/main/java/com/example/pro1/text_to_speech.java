@@ -24,7 +24,7 @@ import java.util.Locale;
 
 public class text_to_speech extends AppCompatActivity {
 
-    String text, translatedString;
+    String text, translatedString, str1, str2;
     private Button etb, cb;
     private EditText et;
     private TextToSpeech tts;
@@ -47,49 +47,11 @@ public class text_to_speech extends AppCompatActivity {
         s1.setAdapter(adapter);
         s2.setAdapter(adapter);
 
-        String str1 = s1.getSelectedItem().toString();
-        String str2 = s1.getSelectedItem().toString();
-        final String inputLanguage;
+        str1 = s1.getSelectedItem().toString();
+        str2 = s1.getSelectedItem().toString();
+
         final String outputLanguage;
         final Locale loc;
-
-
-        switch (str1) {
-            case "English":
-                inputLanguage = TranslateLanguage.ENGLISH;
-                break;
-
-            case "French":
-                inputLanguage = TranslateLanguage.FRENCH;
-                break;
-
-            case "German":
-                inputLanguage = TranslateLanguage.GERMAN;
-                break;
-
-            case "Hindi":
-                inputLanguage = TranslateLanguage.HINDI;
-                break;
-
-            case "Italian":
-                inputLanguage = TranslateLanguage.ITALIAN;
-                break;
-
-            case "Japanese":
-                inputLanguage = TranslateLanguage.JAPANESE;
-                break;
-
-            case "Korean":
-                inputLanguage = TranslateLanguage.KOREAN;
-                break;
-
-            default:
-                inputLanguage = TranslateLanguage.ENGLISH;
-                break;
-
-
-        }
-
 
         switch (str2) {
             case "English":
@@ -131,8 +93,6 @@ public class text_to_speech extends AppCompatActivity {
                 loc = new Locale("en_US");
                 outputLanguage = TranslateLanguage.ENGLISH;
                 break;
-
-
         }
 
         tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
@@ -156,7 +116,42 @@ public class text_to_speech extends AppCompatActivity {
         cb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TranslatorOptions options = new TranslatorOptions.Builder().setSourceLanguage(inputLanguage).setTargetLanguage(outputLanguage).build();
+                final String inputLanguage;
+                switch (str1) {
+                    case "English":
+                        inputLanguage = TranslateLanguage.ENGLISH;
+                        break;
+
+                    case "French":
+                        inputLanguage = TranslateLanguage.FRENCH;
+                        break;
+
+                    case "German":
+                        inputLanguage = TranslateLanguage.GERMAN;
+                        break;
+
+                    case "Hindi":
+                        inputLanguage = TranslateLanguage.HINDI;
+                        break;
+
+                    case "Italian":
+                        inputLanguage = TranslateLanguage.ITALIAN;
+                        break;
+
+                    case "Japanese":
+                        inputLanguage = TranslateLanguage.JAPANESE;
+                        break;
+
+                    case "Korean":
+                        inputLanguage = TranslateLanguage.KOREAN;
+                        break;
+
+                    default:
+                        inputLanguage = TranslateLanguage.ENGLISH;
+                        break;
+                }
+
+                TranslatorOptions options = new TranslatorOptions.Builder().setSourceLanguage(inputLanguage).setTargetLanguage(TranslateLanguage.ENGLISH).build();
                 final Translator translator = Translation.getClient(options);
 
                 DownloadConditions conditions = new DownloadConditions.Builder().build();
@@ -170,15 +165,15 @@ public class text_to_speech extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(text_to_speech.this, "Couldn't download the model", Toast.LENGTH_SHORT).show();
                         return;
-
                     }
                 });
 
 
-                translator.translate(text).addOnSuccessListener(new OnSuccessListener<String>() {
+                translator.translate(et.getText().toString()).addOnSuccessListener(new OnSuccessListener<String>() {
                     @Override
                     public void onSuccess(String s) {
                         et.setText(s);
+                        Toast.makeText(text_to_speech.this, s, Toast.LENGTH_SHORT).show();
                         translatedString = s;
 
                     }
