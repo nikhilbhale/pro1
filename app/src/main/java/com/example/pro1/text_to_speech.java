@@ -47,8 +47,11 @@ public class text_to_speech extends AppCompatActivity {
         s1.setAdapter(adapter);
         s2.setAdapter(adapter);
 
-        str1 = s1.getSelectedItem().toString();
+       /* str1 = s1.getSelectedItem().toString();
         str2 = s1.getSelectedItem().toString();
+*/
+        str1 = String.valueOf(s1.getSelectedItem());
+        str2 = String.valueOf(s2.getSelectedItem());
 
         final String outputLanguage;
         final Locale loc;
@@ -151,7 +154,7 @@ public class text_to_speech extends AppCompatActivity {
                         break;
                 }
 
-                TranslatorOptions options = new TranslatorOptions.Builder().setSourceLanguage(inputLanguage).setTargetLanguage(TranslateLanguage.ENGLISH).build();
+                TranslatorOptions options = new TranslatorOptions.Builder().setSourceLanguage(inputLanguage).setTargetLanguage(outputLanguage).build();
                 final Translator translator = Translation.getClient(options);
 
                 DownloadConditions conditions = new DownloadConditions.Builder().build();
@@ -173,7 +176,6 @@ public class text_to_speech extends AppCompatActivity {
                     @Override
                     public void onSuccess(String s) {
                         et.setText(s);
-                        Toast.makeText(text_to_speech.this, s, Toast.LENGTH_SHORT).show();
                         translatedString = s;
 
                     }
