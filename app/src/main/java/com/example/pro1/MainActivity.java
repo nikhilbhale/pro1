@@ -3,13 +3,13 @@ package com.example.pro1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button img_text, text_speech, speech_text, pdf_reader;
+    private CardView img_text, text_speech, speech_text, pdf_reader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -14,6 +14,7 @@ import android.provider.Settings;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ import androidx.core.content.FileProvider;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -46,6 +48,7 @@ public class img_to_text extends AppCompatActivity {
     protected static final int PERMISSIONS_REQUEST_CODE = 1240;
     private String text;
     private Uri image_uri;
+    private FloatingActionButton fab1;
     private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
 
     @Override
@@ -55,9 +58,20 @@ public class img_to_text extends AppCompatActivity {
 
         mResultEt = findViewById(R.id.resultEt);
         mPreviewIv = findViewById(R.id.imageIv);
+        fab1 = findViewById(R.id.fab1);
+
 
         checkAndRequestPermissions();
+
+        fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showImageImportDialog();
+            }
+        });
     }
+
+
     private void checkAndRequestPermissions() {
         List<String> listPermissionsNeeded = new ArrayList<>();
         for (String perm : permissions)
