@@ -13,10 +13,10 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="sans-serif-black"
+            android:fontFamily="sans-serif-medium"
             android:padding="10dp"
-            android:text="hello how r u?"
-            android:textSize="30sp" />
+            android:textSize="20sp" />
+
     </ScrollView>
 
     <Button
@@ -44,6 +44,5 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
         android:src="@drawable/browse_icon" />
-
 
 </RelativeLayout>
