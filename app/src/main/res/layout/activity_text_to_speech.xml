@@ -17,7 +17,7 @@
         android:maxLines="2" />
 
     <Button
-        android:id="@+id/etb"
+        android:id="@+id/speak"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -42,7 +42,7 @@
         android:layout_marginRight="16dp" />
 
     <Button
-        android:id="@+id/cb"
+        android:id="@+id/translate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
