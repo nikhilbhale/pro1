@@ -60,7 +60,6 @@ public class img_to_text extends AppCompatActivity {
         mPreviewIv = findViewById(R.id.imageIv);
         fab1 = findViewById(R.id.fab1);
 
-
         checkAndRequestPermissions();
 
         fab1.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +69,6 @@ public class img_to_text extends AppCompatActivity {
             }
         });
     }
-
 
     private void checkAndRequestPermissions() {
         List<String> listPermissionsNeeded = new ArrayList<>();
@@ -177,11 +175,8 @@ public class img_to_text extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
 
-                        Intent pictureActionIntent = new Intent(
-                                Intent.ACTION_PICK,
-                                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(
-                                pictureActionIntent, GALLERY_PICTURE);
+                        Intent pictureActionIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(pictureActionIntent, GALLERY_PICTURE);
                     }
                 });
 
@@ -189,11 +184,9 @@ public class img_to_text extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
 
-                        Intent intent = new Intent(
-                                MediaStore.ACTION_IMAGE_CAPTURE);
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                         File f = new File(Environment.getExternalStorageDirectory(), "temp.jpg");
                         image_uri = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", f);
-                        ;
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
 
                         startActivityForResult(intent, CAMERA_REQUEST);

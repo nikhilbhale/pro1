@@ -24,8 +24,9 @@ import java.util.Locale;
 
 public class text_to_speech extends AppCompatActivity {
 
-    String text, translatedString, str1, str2;
-    private Button etb, cb;
+    private String text, translatedString, str1, str2, inputLanguage;
+    private Boolean flag = false;
+    private Button speak, translate;
     private EditText et;
     private TextToSpeech tts;
 
@@ -34,127 +35,100 @@ public class text_to_speech extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text_to_speech);
 
-
-        etb = findViewById(R.id.etb);
+        speak = findViewById(R.id.speak);
         et = findViewById(R.id.et);
-        cb = findViewById(R.id.cb);
+        translate = findViewById(R.id.translate);
         final Spinner s1 = findViewById(R.id.spinner1);
         final Spinner s2 = findViewById(R.id.spinner2);
         text = et.getText().toString();
+
+        //translatedString = text;
+
+        final String[] outputLanguage = new String[1];
+        final Locale[] loc = new Locale[1];
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(text_to_speech.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.languages));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s1.setAdapter(adapter);
         s2.setAdapter(adapter);
 
-       /* str1 = s1.getSelectedItem().toString();
-        str2 = s1.getSelectedItem().toString();
-*/
-        str1 = String.valueOf(s1.getSelectedItem());
-        str2 = String.valueOf(s2.getSelectedItem());
-
-        final String outputLanguage;
-        final Locale loc;
-
-        switch (str2) {
-            case "English":
-                loc = new Locale("en_US");
-                outputLanguage = TranslateLanguage.ENGLISH;
-                break;
-
-            case "French":
-                loc = new Locale("fr_FR");
-                outputLanguage = TranslateLanguage.FRENCH;
-                break;
-
-            case "German":
-                loc = new Locale("gsw_CH");
-                outputLanguage = TranslateLanguage.GERMAN;
-                break;
-
-            case "Hindi":
-                loc = new Locale("hi_IN");
-                outputLanguage = TranslateLanguage.HINDI;
-                break;
-
-            case "Italian":
-                loc = new Locale("it_IT");
-                outputLanguage = TranslateLanguage.ITALIAN;
-                break;
-
-            case "Japanese":
-                loc = new Locale("ja_JP");
-                outputLanguage = TranslateLanguage.JAPANESE;
-                break;
-
-            case "Korean":
-                loc = new Locale("ko_KP");
-                outputLanguage = TranslateLanguage.KOREAN;
-                break;
-
-            default:
-                loc = new Locale("en_US");
-                outputLanguage = TranslateLanguage.ENGLISH;
-                break;
-        }
+        tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status == TextToSpeech.SUCCESS)
+                    tts.setLanguage(new Locale("en_US"));
+            }
+        });
 
         tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
-            public void onInit(int i) {
-                if (i == TextToSpeech.SUCCESS) {
-                    tts.setLanguage(loc);
-                }
+            public void onInit(int status) {
+                if (status == TextToSpeech.SUCCESS)
+                    tts.setLanguage(new Locale("en_US"));
             }
         });
 
-
-        etb.setOnClickListener(new View.OnClickListener() {
+        speak.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
-                tts.speak(translatedString, TextToSpeech.QUEUE_FLUSH, null, null);
+            public void onClick(View v) {
+                tts.speak(et.getText().toString(), TextToSpeech.QUEUE_FLUSH, null, null);
             }
         });
 
-        cb.setOnClickListener(new View.OnClickListener() {
+        translate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                final String inputLanguage;
-                switch (str1) {
-                    case "English":
-                        inputLanguage = TranslateLanguage.ENGLISH;
-                        break;
+            public void onClick(View v) {
+                flag = true;
+                str1 = String.valueOf(s1.getSelectedItem());
+                str2 = String.valueOf(s2.getSelectedItem());
 
-                    case "French":
-                        inputLanguage = TranslateLanguage.FRENCH;
-                        break;
+                if (str1.equalsIgnoreCase("English"))
+                    inputLanguage = TranslateLanguage.ENGLISH;
+                else if (str1.equalsIgnoreCase("French"))
+                    inputLanguage = TranslateLanguage.FRENCH;
+                else if (str1.equalsIgnoreCase("German"))
+                    inputLanguage = TranslateLanguage.GERMAN;
+                else if (str1.equalsIgnoreCase("Hindi"))
+                    inputLanguage = TranslateLanguage.HINDI;
+                else if (str1.equalsIgnoreCase("Italian"))
+                    inputLanguage = TranslateLanguage.ITALIAN;
+                else if (str1.equalsIgnoreCase("Japanese"))
+                    inputLanguage = TranslateLanguage.JAPANESE;
+                else if (str1.equalsIgnoreCase("Korean"))
+                    inputLanguage = TranslateLanguage.KOREAN;
 
-                    case "German":
-                        inputLanguage = TranslateLanguage.GERMAN;
-                        break;
-
-                    case "Hindi":
-                        inputLanguage = TranslateLanguage.HINDI;
-                        break;
-
-                    case "Italian":
-                        inputLanguage = TranslateLanguage.ITALIAN;
-                        break;
-
-                    case "Japanese":
-                        inputLanguage = TranslateLanguage.JAPANESE;
-                        break;
-
-                    case "Korean":
-                        inputLanguage = TranslateLanguage.KOREAN;
-                        break;
-
-                    default:
-                        inputLanguage = TranslateLanguage.ENGLISH;
-                        break;
+                if (str2.equalsIgnoreCase("English")) {
+                    loc[0] = new Locale("en_US");
+                    outputLanguage[0] = TranslateLanguage.ENGLISH;
+                } else if (str2.equalsIgnoreCase("French")) {
+                    loc[0] = new Locale("fr_FR");
+                    outputLanguage[0] = TranslateLanguage.FRENCH;
+                } else if (str2.equalsIgnoreCase("German")) {
+                    loc[0] = new Locale("gsw_CH");
+                    outputLanguage[0] = TranslateLanguage.GERMAN;
+                } else if (str2.equalsIgnoreCase("Hindi")) {
+                    loc[0] = new Locale("hi_IN");
+                    outputLanguage[0] = TranslateLanguage.HINDI;
+                } else if (str2.equalsIgnoreCase("Italian")) {
+                    loc[0] = new Locale("it_IT");
+                    outputLanguage[0] = TranslateLanguage.ITALIAN;
+                } else if (str2.equalsIgnoreCase("Japanese")) {
+                    loc[0] = new Locale("ja_JP");
+                    outputLanguage[0] = TranslateLanguage.JAPANESE;
+                } else if (str2.equalsIgnoreCase("Korean")) {
+                    loc[0] = new Locale("ko_KP");
+                    outputLanguage[0] = TranslateLanguage.KOREAN;
                 }
 
-                TranslatorOptions options = new TranslatorOptions.Builder().setSourceLanguage(inputLanguage).setTargetLanguage(outputLanguage).build();
+                tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+                    @Override
+                    public void onInit(int status) {
+                        if (status == TextToSpeech.SUCCESS)
+                            tts.setLanguage(loc[0]);
+                    }
+                });
+
+                TranslatorOptions options = new TranslatorOptions.Builder().setSourceLanguage(inputLanguage).setTargetLanguage(outputLanguage[0]).build();
                 final Translator translator = Translation.getClient(options);
 
                 DownloadConditions conditions = new DownloadConditions.Builder().build();
@@ -171,32 +145,19 @@ public class text_to_speech extends AppCompatActivity {
                     }
                 });
 
-
                 translator.translate(et.getText().toString()).addOnSuccessListener(new OnSuccessListener<String>() {
                     @Override
                     public void onSuccess(String s) {
                         et.setText(s);
                         translatedString = s;
-
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(text_to_speech.this, "downloading model", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(text_to_speech.this, "Downloading Model. Please Wait...", Toast.LENGTH_LONG).show();
                     }
                 });
             }
         });
-
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (tts != null) {
-            tts.stop();
-            tts.shutdown();
-        }
     }
 }
