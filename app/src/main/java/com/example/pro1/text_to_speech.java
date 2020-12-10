@@ -60,14 +60,14 @@ public class text_to_speech extends AppCompatActivity {
             }
         });
 
-        tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+       /* tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS)
                     tts.setLanguage(new Locale("en_US"));
             }
         });
-
+*/
         speak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

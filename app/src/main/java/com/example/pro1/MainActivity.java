@@ -9,7 +9,7 @@ import androidx.cardview.widget.CardView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CardView img_text, text_speech, speech_text, pdf_reader;
+    private CardView img_text, text_speech, speech_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         img_text = findViewById(R.id.img_text);
         text_speech = findViewById(R.id.text_speech);
         speech_text = findViewById(R.id.speech_text);
-        pdf_reader = findViewById(R.id.pdf_reader);
+
 
         img_text.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,13 +45,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        pdf_reader.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, pdf_reader.class);
-                startActivity(intent);
-            }
-        });
 
     }
 }

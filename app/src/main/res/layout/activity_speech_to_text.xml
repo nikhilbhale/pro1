@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15dp"
+    android:background="@drawable/back3"
     tools:context=".speech_to_text">
 
     <TextView
@@ -31,6 +32,7 @@
         android:layout_marginTop="265dp"
         android:layout_marginRight="16dp"
         android:hint="Enter your text"
+        android:textColor="#000000"
         android:inputType="textMultiLine"
         android:lines="3"
         android:maxLines="5" />
