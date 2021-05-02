@@ -12,8 +12,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.SparseArray;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -151,21 +149,6 @@ public class img_to_text extends AppCompatActivity {
         alert.show();
 
         return alert;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);                           //menu button
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();                                              //
-        if (id == R.id.addImage) {
-            showImageImportDialog();
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void showImageImportDialog() {

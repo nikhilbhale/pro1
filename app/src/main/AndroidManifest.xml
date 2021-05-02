@@ -15,9 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".speech_to_text" />
-        <activity android:name=".text_to_speech" />
-        <activity android:name=".img_to_text" />
+        <activity
+            android:name=".speech_to_text"
+            android:label="Speech to Text" />
+        <activity
+            android:name=".text_to_speech"
+            android:label="Text to speech" />
+        <activity
+            android:name=".img_to_text"
+            android:label="Image to Text" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
