@@ -56,7 +56,7 @@ public class img_to_text extends AppCompatActivity {
 
         mResultEt = findViewById(R.id.resultEt);
         mPreviewIv = findViewById(R.id.imageIv);
-        fab1 = findViewById(R.id.fab1);
+        fab1 = findViewById(R.id.fab1); //floating button for image selection
 
 
         checkAndRequestPermissions();
@@ -71,7 +71,7 @@ public class img_to_text extends AppCompatActivity {
 
 
     private void checkAndRequestPermissions() {
-        List<String> listPermissionsNeeded = new ArrayList<>();
+        List<String> listPermissionsNeeded = new ArrayList<>();// list for multiple permissions
         for (String perm : permissions)
             if (ContextCompat.checkSelfPermission(this, perm) != PackageManager.PERMISSION_GRANTED)
                 listPermissionsNeeded.add(perm);

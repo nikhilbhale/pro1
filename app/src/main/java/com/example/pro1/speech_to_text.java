@@ -24,8 +24,8 @@ public class speech_to_text extends AppCompatActivity {
     private TextView inputLang;
     private Spinner spinner;
     private ImageView imageView;
-    private EditText et;
-    private String selectedLang = "en_US";
+    private EditText et;      // enter you text
+    private String selectedLang = "en_US";// default language
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,7 @@ public class speech_to_text extends AppCompatActivity {
         et = findViewById(R.id.et);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(speech_to_text.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.languages));
+        // string array in strings.xml (name=languages)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
@@ -46,7 +47,7 @@ public class speech_to_text extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        selectedLang = "en_US";
+                        selectedLang = "en_US";         //switch case for position of languages
                         break;
                     case 1:
                         selectedLang = "fr_FR";
@@ -81,6 +82,7 @@ public class speech_to_text extends AppCompatActivity {
                 promptSpeechInput();
             }
         });
+        // method call (input of speech)
     }
 
     private void promptSpeechInput() {

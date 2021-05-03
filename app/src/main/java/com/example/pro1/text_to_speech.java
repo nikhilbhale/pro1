@@ -42,10 +42,8 @@ public class text_to_speech extends AppCompatActivity {
         final Spinner s2 = findViewById(R.id.spinner2);
         text = et.getText().toString();
 
-        //translatedString = text;
-
         final String[] outputLanguage = new String[1];
-        final Locale[] loc = new Locale[1];
+        final Locale[] loc = new Locale[1]; // loc variable to store lang code
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(text_to_speech.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.languages));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -56,7 +54,7 @@ public class text_to_speech extends AppCompatActivity {
             @Override
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS)
-                    tts.setLanguage(new Locale("en_US"));
+                    tts.setLanguage(new Locale("en_US"));// default lang
             }
         });
 
@@ -84,7 +82,7 @@ public class text_to_speech extends AppCompatActivity {
 
                 if (str1.equalsIgnoreCase("English"))
                     inputLanguage = TranslateLanguage.ENGLISH;
-                else if (str1.equalsIgnoreCase("French"))
+                else if (str1.equalsIgnoreCase("French"))  //spinner lang selection
                     inputLanguage = TranslateLanguage.FRENCH;
                 else if (str1.equalsIgnoreCase("German"))
                     inputLanguage = TranslateLanguage.GERMAN;
@@ -103,7 +101,7 @@ public class text_to_speech extends AppCompatActivity {
                 } else if (str2.equalsIgnoreCase("French")) {
                     loc[0] = new Locale("fr_FR");
                     outputLanguage[0] = TranslateLanguage.FRENCH;
-                } else if (str2.equalsIgnoreCase("German")) {
+                } else if (str2.equalsIgnoreCase("German")) { //set output lang
                     loc[0] = new Locale("gsw_CH");
                     outputLanguage[0] = TranslateLanguage.GERMAN;
                 } else if (str2.equalsIgnoreCase("Hindi")) {
@@ -133,7 +131,7 @@ public class text_to_speech extends AppCompatActivity {
 
                 DownloadConditions conditions = new DownloadConditions.Builder().build();
                 translator.downloadModelIfNeeded(conditions).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
+                    @Override  //download lang module if not present
                     public void onSuccess(Void aVoid) {
 
                     }
